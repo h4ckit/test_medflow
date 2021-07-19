@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+
+  backend:
+    depends_on:
+      - db
+    build: .
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/backend
+    environment:
+      - DB_NAME=test_db
+      - DB_USER=test_admin
+      - DB_PASSWORD=test_admin_pass
+      - DB_HOST=db
+      - DB_HOST_PORT=5432
+
+      - DEBUG=True
+      - SECRET_KEY=very-secret-key
+    ports:
+      - 8000:8000
+    networks:
+      backend:
+
+  db:
+    restart: always
+    image: postgres:12.0-alpine
+    container_name: db
+    volumes:
+      - db:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=test_admin
+      - POSTGRES_PASSWORD=test_admin_pass
+      - POSTGRES_DB=test_db
+    ports:
+      - "5433:5432"
+    networks:
+      backend:
+volumes:
+  db:
+
+networks:
+  backend:
