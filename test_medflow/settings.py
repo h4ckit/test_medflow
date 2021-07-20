@@ -9,6 +9,8 @@ ALLOWED_HOSTS = '*'
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
+AUTH_USER_MODEL = 'medflow.User'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -92,3 +94,5 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
