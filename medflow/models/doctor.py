@@ -6,7 +6,8 @@ from . import User
 class Doctor(User):
     days_to_generate = models.IntegerField(default=7)
     work_time = models.ManyToManyField('DeltaTime', related_name='doctor_work_times')
-    vacation = models.DateTimeField(blank=True, null=True)
+    vacation_start = models.DateField(blank=True, null=True)
+    vacation_end = models.DateField(blank=True, null=True)
     lunch_break = models.ManyToManyField('DeltaTime', related_name='doctor_lunch_breaks')
     slot_time = models.TimeField(default=datetime.time(0, 20, 0))
 

@@ -13,7 +13,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'create_time_tables': {
         'task': 'medflow.tasks.create_time_tables',
-        'schedule': 60.0,
+        'schedule': 10.0,
     },
 }
 
