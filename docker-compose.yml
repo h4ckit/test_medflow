@@ -19,6 +19,9 @@ services:
       - DB_HOST=db
       - DB_HOST_PORT=5432
 
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
       - DEBUG=True
       - SECRET_KEY=very-secret-key
     ports:
@@ -27,6 +30,8 @@ services:
       backend:
 
   db:
+    depends_on:
+      - redis
     restart: always
     image: postgres:12.0-alpine
     container_name: db
@@ -45,8 +50,29 @@ services:
       retries: 5
     networks:
       backend:
+
+  redis:
+    restart: always
+    image: redis:5-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - "6379:6379"
+    networks:
+      backend:
+
+  celery:
+    build: .
+    command: celery -A core worker -l info
+    volumes:
+      - ./celery/:/celery/
+    depends_on:
+      - redis
+
 volumes:
   db:
+  redis:
+  celery:
 
 networks:
   backend:
