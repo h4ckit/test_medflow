@@ -1,7 +1,13 @@
 from django.contrib.auth.base_user import BaseUserManager
+from django.db import models
 
 
 class UserManager(BaseUserManager):
+    all_objects = models.Manager()
+
+    def get_queryset(self) -> models.QuerySet:
+        return super().get_queryset().filter(is_active=True)
+
     def create_user(self, email, password, first_name, last_name, **extra_fields):
         if not email:
             raise ValueError('The Email must be set')

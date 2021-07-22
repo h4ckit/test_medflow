@@ -3,5 +3,5 @@ from django.urls import path, include, re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('auth/', include('medflow.urls', namespace='medflow')),
+    re_path('', include('medflow.urls', namespace='medflow')),
 ]

@@ -12,6 +12,7 @@ services:
     volumes:
       - .:/backend
     environment:
+      - DB=django.db.backends.postgresql_psycopg2
       - DB_NAME=test_db
       - DB_USER=test_admin
       - DB_PASSWORD=test_admin_pass

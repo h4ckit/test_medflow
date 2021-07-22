@@ -1,4 +1,4 @@
-from medflow.models import User, Doctor, DeltaTime
+from medflow.models import User, Doctor, DeltaTime, TimeTable
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
@@ -23,6 +23,7 @@ from django.contrib.auth.admin import UserAdmin
 #     )
 #
 #
-# admin.site.register(User, UsersAdmin)
-# admin.site.register(Doctor, admin.ModelAdmin)
-# admin.site.register(DeltaTime, admin.ModelAdmin)
+admin.site.register(User, admin.ModelAdmin)
+admin.site.register(Doctor, admin.ModelAdmin)
+admin.site.register(DeltaTime, admin.ModelAdmin)
+admin.site.register(TimeTable, admin.ModelAdmin)

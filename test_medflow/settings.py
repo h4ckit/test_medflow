@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,6 +25,7 @@ INSTALLED_APPS = [
     'medflow',
 
     'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -59,8 +61,8 @@ WSGI_APPLICATION = 'test_medflow.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME', default='test_db'),
+        'ENGINE': config('DB', default='django.db.backends.sqlite3'),
+        'NAME': config('DB_NAME', default=os.path.join(BASE_DIR, "db.sqlite3")),
         'USER': config('DB_USER', default='test_admin'),
         'PASSWORD': config('DB_PASSWORD', default='test_admin_pass'),
         'HOST': config('DB_HOST', default='127.0.0.1'),
